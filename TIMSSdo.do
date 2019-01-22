@@ -38,5 +38,17 @@ factor E_GUSTO [aw= TOTWGT] if IDCNTRY==392, ml bl(.35)
 sem (E_AUTO* <- FACTOR) if IDCNTRY==222 [iweight= TOTWGT], stand latent(FACTOR)
 estat ggof, stats(rmsea indices)
 
+// Invarianza de medición en Eda
+// Primer nivel de invarianza
+sem (E_GUSTO*<-FACTOR)(E_GUSTO1<-FACTOR _cons@0)[iweight=SENWGT], group(IDCNTRY) latent(FACTOR) ginvariant(none) mean(FACTOR) variance(e.E_GUSTO1@0)
+estat ggof
+sem (E_GUSTO*<-FACTOR)(E_GUSTO1<-FACTOR _cons@0)[iweight=SENWGT], group(IDCNTRY) latent(FACTOR) ginvariant(mcoef) mean(FACTOR) variance(e.E_GUSTO1@0)
+
+sem (E_GUSTO*<-FACTOR)(E_GUSTO1<-FACTOR _cons@0)[iweight=SENWGT], group(IDCNTRY) latent(FACTOR) ginvariant(mcoef mcons) mean(FACTOR) variance(e.E_GUSTO1@0)
+
+
+
+
+
 
 
